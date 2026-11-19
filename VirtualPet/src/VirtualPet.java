@@ -25,10 +25,16 @@ public class VirtualPet {
         return name + " Information:\nEnergy: " + energyLevel +"\nHappiness: " + happinessLevel + "\nWeight: " + weight + "g\nAge: " + ageMonth + " months and " + ageYear + " years";
     }
 
-    public void feed(){
-        weight++;
-        if(energyLevel < 10){
-            energyLevel++;
+    public void feed(Food item){
+        weight += item.getWeightGain();
+        happinessLevel += item.getHappinessIncrease();
+        energyLevel += item.getEnergyIncrease();
+        if(happinessLevel > 10){
+            happinessLevel = 10;
+        }
+
+        if(energyLevel > 10){
+            energyLevel = 10;
         }
     }
 
@@ -40,7 +46,7 @@ public class VirtualPet {
         return happinessLevel;
     }
 
-    public void play(){
+    public boolean play(Game game){
         if(happinessLevel < 10){
             happinessLevel++;
         }
